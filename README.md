@@ -10,28 +10,28 @@ Since this is a basic app, the items in to store are predefined with 10 items. T
 
 ## Technologies Used:
 
-Node.JS runtime
-MySQL database npm-package
-Inquirer npm-package
-cli-table npm-package
-dot-env npm-package
+- vNode.JS runtime
+- MySQL database npm-package
+- Inquirer npm-package
+- CLI-table npm-package
+- DotEnv npm-package
 
 ## Usage:
 
 ### Customer view
 
-- Purchase item
+> Purchase item
 
 ### Manager view
 
-- View all products
-- View low inventory
-- Add more of inventory
-- Add new product
+> View all products
+> View low inventory
+> Add more of inventory
+> Add new product
 
 ### Supervisor view
 
-- View Products Sales by Department
-- View All Departments
-- Create New Department
-- Remove Department
+> View Products Sales by Department
+> View All Departments
+> Create New Department
+> Remove Department
