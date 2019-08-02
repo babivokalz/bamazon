@@ -6,11 +6,11 @@ For this assignment, we were to create a node application called "bamazon" that 
 
 ## Technologies Used:
 
-- Node.JS runtime
-- MySQL database npm-package
-- Inquirer npm-package
-- CLI-table npm-package
-- DotEnv npm-package
+- Node.JS
+- MySQL
+- Inquirer
+- CLI-table
+- DotEnv
 
 ## Usage:
 
