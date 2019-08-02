@@ -2,15 +2,11 @@
 
 ## Overview:
 
-In this assignment, a command line interface (CLI) node app was created which closely resembles Amazon Market Place . This app will take in orders from customers and adjust stock from the store's inventory. Additionally, the app tracks product sales across your store's departments and then provide a summary of the highest-grossing departments in the store.
-
-You can find the instructions for this assignment here: homework-instructions.md
-
-Since this is a basic app, the items in to store are predefined with 10 items. The overall goal of this assignment was using node with a sql interface to process data.
+For this assignment, we were to create a node application called "Bamazon" that takes in commands lines from the user. This app closely resembles Amazon where it will take in orders from customers and adjust your store's inventory, and tracks product sales across your store's departments and then provide a summary of the highest-grossing departments in the store.
 
 ## Technologies Used:
 
-- vNode.JS runtime
+- Node.JS runtime
 - MySQL database npm-package
 - Inquirer npm-package
 - CLI-table npm-package
@@ -20,18 +16,12 @@ Since this is a basic app, the items in to store are predefined with 10 items. T
 
 ### Customer view
 
-> Purchase item
+> node bamazonCustomer.js
 
 ### Manager view
 
-> View all products
-> View low inventory
-> Add more of inventory
-> Add new product
+> node bamazonManager.js
 
 ### Supervisor view
 
-> View Products Sales by Department
-> View All Departments
-> Create New Department
-> Remove Department
+> node bamazonSupervisor.js
