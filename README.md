@@ -9,8 +9,6 @@ For this assignment, we were to create a node application called "bamazon" that 
 - Node.JS
 - MySQL
 - Inquirer
-- CLI-table
-- DotEnv
 
 ## Usage:
 
