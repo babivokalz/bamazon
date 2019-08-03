@@ -22,10 +22,23 @@ When the user runs the command, "node bamazonCustomer.js" they are met with a we
 
 > [logo]: https://github.com/babivokalz/bamazon/blob/master/images/loaded%20screen.png "loaded screen"
 
-Once the user answers the first prompt, they are prompted once more to enter in the desired quantity for the item. Once the quantity is entered, the user will receive a
+Once the user answers the first prompt, they are prompted once more to enter in the desired quantity for the item. Once the quantity is entered, the user will receive a notification that the item of their desired quantity is in stock and will display the total cost of the item.
 
 > ![alt text][logo1]
-> [logo1]: https://github.com/babivokalz/bamazon/blob/master/images/asks%20customer%20to%20enter%20in%20qt.png "qt amt"
+
+> [logo1]: https://github.com/babivokalz/bamazon/blob/master/images/total%20cost%20of%20item.png "qt amt and total"
+
+The user will then be asked if they would like to make another purchase, if they choose yes then they will be prompted to enter in the item ID and quantity that they would like to purchase next.
+
+> ![alt text][logo2]
+
+> [logo2]: https://github.com/babivokalz/bamazon/blob/master/images/Customer%20says%20Y%20.png "yes to another purchase"
+
+If the user declines and doesn't not wish to make another purchase, then a nice goodbye message is displayed and the application will end.
+
+> ![alt text][logo3]
+
+> [logo3]: https://github.com/babivokalz/bamazon/blob/master/images/customer%20declines%20another%20purchase.png "no to another purchase"
 
 ### Manager view
 
