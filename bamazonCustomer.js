@@ -63,7 +63,7 @@ function inquirerPrompt() {
     .prompt([
       {
         type: "input",
-        name: "itemID",
+        name: "item_id",
         message:
           "Please enter in the Item ID of the item you'd like to purchase.\n"
       },
@@ -74,27 +74,38 @@ function inquirerPrompt() {
           "Please enter in the desired quantity that you would like to purchase for your item."
       }
     ])
-    .then(function(answer) {
-      var item = {
-        id: answer.itemID - 1,
-        quantity: answer.quantity
-      };
-      if (item.quantity > 0) {
-        if (item.quantity < results[item.id].stock_quantity) {
-          connection.query(
-            "UPDATE products SET stock_quantity = stock_quantity - " +
-              item.quantity +
-              "WHERE item_id = " +
-              item.id
-          );
+    .then(function(userPurchase) {
+      connection.query(
+        `SELECT * FROM products WHERE item_id='${item_id}'`,
+        userPurchase.item_id,
+        function(err, results) {
+          for (var i = 0; i < results.length; i++) {
+            if (userPurchase.quantity > results[i].stock_quantity) {
+              console.log("Insufficient quantity entered!");
+              start();
+            } else {
+              console.log("Good news! Your desired item is in stock!");
+              console.log(
+                "Your total cost for " +
+                  userPurchase.quantity +
+                  " " +
+                  results[0].product_name +
+                  userPurchase.quantity * results[0].price +
+                  "."
+              );
+              var updatedInventory =
+                results[i].stock_quantity - userPurchase.quantity;
+              var purchaseID = userPurchase.item_id;
+              setTimeout(function() {
+                anotherPurchase();
+              }, 1000);
+            }
+          }
         }
-      }
-      checkInventory(answer.itemID, answer.quantity);
-      setTimeout(function() {
-        anotherPurchase();
-      }, 1000);
+      );
     });
 }
+
 function anotherPurchase() {
   inquirer
     .prompt([
@@ -114,23 +125,23 @@ function anotherPurchase() {
     });
 }
 
-function checkInventory(item_id, inputQuantity) {
-  if (err) {
-    console.log(err);
-  }
-  if (inputQuantity <= results[0].stock_quantity) {
-    var customerTotal = results[0].price * inputQuantity;
-    console.log("Good news! Your desired item is in stock!");
-    console.log(
-      "Your total cost for " +
-        inputQuantity +
-        " " +
-        results[0].product_name +
-        " is " +
-        customerTotal +
-        "."
-    );
-  } else {
-    console.log("Insuffient quantity!");
-  }
-}
+// function checkInventory() {
+//   if (err) {
+//     console.log(err);
+//   }
+//   if (inputQuantity <= results[0].stock_quantity) {
+//     var customerTotal = results[0].price * inputQuantity;
+//     console.log("Good news! Your desired item is in stock!");
+//     console.log(
+//       "Your total cost for " +
+//         inputQuantity +
+//         " " +
+//         results[0].product_name +
+//         " is " +
+//         customerTotal +
+//         "."
+//     );
+//   } else {
+//     console.log("Insuffient quantity!");
+//   }
+// }
