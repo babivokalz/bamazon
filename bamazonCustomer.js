@@ -63,7 +63,7 @@ function inquirerPrompt() {
     .prompt([
       {
         type: "input",
-        name: "item_id",
+        name: "itemId",
         message:
           "Please enter in the Item ID of the item you'd like to purchase.\n"
       },
@@ -76,13 +76,20 @@ function inquirerPrompt() {
     ])
     .then(function(userPurchase) {
       connection.query(
-        `SELECT * FROM products WHERE item_id='${item_id}'`,
-        userPurchase.item_id,
+        "SELECT * FROM products WHERE item_id=?",
+        userPurchase.itemId,
         function(err, results) {
           for (var i = 0; i < results.length; i++) {
             if (userPurchase.quantity > results[i].stock_quantity) {
-              console.log("Insufficient quantity entered!");
+              console.log(
+                "\nSorry! We have insufficient quantity for that item!\n"
+              );
+              console.log("Please choose an item from the table below:");
               start();
+              productList();
+              setTimeout(function() {
+                inquirerPrompt();
+              }, 1000);
             } else {
               console.log("Good news! Your desired item is in stock!");
               console.log(
@@ -90,12 +97,14 @@ function inquirerPrompt() {
                   userPurchase.quantity +
                   " " +
                   results[0].product_name +
+                  " is " +
+                  "$" +
                   userPurchase.quantity * results[0].price +
                   "."
               );
               var updatedInventory =
                 results[i].stock_quantity - userPurchase.quantity;
-              var purchaseID = userPurchase.item_id;
+              var purchaseID = userPurchase.itemId;
               setTimeout(function() {
                 anotherPurchase();
               }, 1000);
@@ -119,7 +128,7 @@ function anotherPurchase() {
       if (maybe.wantMore) {
         inquirerPrompt();
       } else {
-        console.log("\nPlease come again!\n");
+        console.log("\nThank you, please come again!\n");
         process.exit();
       }
     });
