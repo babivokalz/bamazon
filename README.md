@@ -16,6 +16,9 @@ For this assignment, we were to create a node application called "bamazon" that 
 
 > node bamazonCustomer.js
 
+> ![alt text][logo]
+> [logo]:
+
 ### Manager view
 
 > node bamazonManager.js
