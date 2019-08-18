@@ -126,6 +126,7 @@ function anotherPurchase() {
     ])
     .then(function(maybe) {
       if (maybe.wantMore) {
+        productList();
         inquirerPrompt();
       } else {
         console.log("\nThank you, please come again!\n");
@@ -133,24 +134,3 @@ function anotherPurchase() {
       }
     });
 }
-
-// function checkInventory() {
-//   if (err) {
-//     console.log(err);
-//   }
-//   if (inputQuantity <= results[0].stock_quantity) {
-//     var customerTotal = results[0].price * inputQuantity;
-//     console.log("Good news! Your desired item is in stock!");
-//     console.log(
-//       "Your total cost for " +
-//         inputQuantity +
-//         " " +
-//         results[0].product_name +
-//         " is " +
-//         customerTotal +
-//         "."
-//     );
-//   } else {
-//     console.log("Insuffient quantity!");
-//   }
-// }
