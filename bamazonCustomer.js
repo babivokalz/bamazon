@@ -47,9 +47,7 @@ function productList() {
     );
     for (i = 0; i < results.length; i++) {
       console.log(
-        `| ${results[i].item_id} \t   \t| ${results[i].product_name} \t \t | ${
-          results[i].department_name
-        } \t | ${results[i].price} \t | ${results[i].stock_quantity} \t \t    |`
+        `| ${results[i].item_id} \t   \t| ${results[i].product_name} \t \t | ${results[i].department_name} \t | ${results[i].price} \t | ${results[i].stock_quantity} \t \t    |`
       );
       console.log(
         "---------------------------------------------------------------------------------------------"
@@ -74,46 +72,108 @@ function inquirerPrompt() {
           "Please enter in the desired quantity that you would like to purchase for your item."
       }
     ])
-    .then(function(userPurchase) {
-      connection.query(
-        "SELECT * FROM products WHERE item_id=?",
-        userPurchase.itemId,
-        function(err, results) {
-          for (var i = 0; i < results.length; i++) {
-            if (userPurchase.quantity > results[i].stock_quantity) {
-              console.log(
-                "\nSorry! We have insufficient quantity for that item!\n"
-              );
-              console.log("Please choose an item from the table below:");
-              start();
-              productList();
-              setTimeout(function() {
-                inquirerPrompt();
-              }, 1000);
-            } else {
-              console.log("Good news! Your desired item is in stock!");
-              console.log(
-                "Your total cost for " +
-                  userPurchase.quantity +
-                  " " +
-                  results[0].product_name +
-                  " is " +
-                  "$" +
-                  userPurchase.quantity * results[0].price +
-                  "."
-              );
-              var updatedInventory =
-                results[i].stock_quantity - userPurchase.quantity;
-              var purchaseID = userPurchase.itemId;
-              setTimeout(function() {
-                anotherPurchase();
-              }, 1000);
-            }
-          }
-        }
-      );
+    .then(function(answer) {
+      checkStock(answer.itemId, answer.quantity);
+      setTimeout(function() {
+        anotherPurchase();
+      }, 1000);
     });
 }
+
+function checkStock(itemId, desiredQuantity) {
+  console.log("Seeing how many of those we have in stock...");
+  connection.query(`SELECT * FROM products WHERE item_id='${itemId}'`, function(
+    err,
+    res
+  ) {
+    if (err) throw err;
+    let currentStockCount = res[0].stock_quantity;
+    let unitPrice = res[0].price;
+    console.log(
+      `You're looking for ${desiredQuantity} ${res[0].product_name}s. We have ${res[0].stock_quantity} in stock.`
+    );
+    if (currentStockCount < desiredQuantity) {
+      console.log("Sorry! Insufficient quantity!\n");
+      return;
+    } else {
+      decreaseStockAndShowAll(
+        itemId,
+        currentStockCount,
+        desiredQuantity,
+        unitPrice
+      );
+    }
+  });
+}
+
+function decreaseStockAndShowAll(
+  itemId,
+  currentStockCount,
+  desiredQuantity,
+  unitPrice
+) {
+  console.log("Pulling from the shelf...");
+  connection.query(
+    "UPDATE products SET ? WHERE ?",
+    [
+      {
+        stock_quantity: currentStockCount - desiredQuantity
+        // product_sales: unitPrice * desiredQuantity
+      },
+      {
+        item_id: itemId
+      }
+    ],
+    function(err, res) {
+      if (err) throw err;
+    }
+  );
+  console.log(
+    `Done. The total cost is $${(unitPrice * desiredQuantity).toFixed(2)}\n`
+  );
+  productList();
+}
+
+//     then(function(userPurchase) {
+//       connection.query(
+//         "SELECT * FROM products WHERE item_id=?",
+//         userPurchase.itemId,
+//         function(err, results) {
+//           for (var i = 0; i < results.length; i++) {
+//             if (userPurchase.quantity > results[i].stock_quantity) {
+//               console.log(
+//                 "\nSorry! We have insufficient quantity for that item!\n"
+//               );
+//               console.log("Please choose an item from the table below:");
+//               start();
+//               productList();
+//               setTimeout(function() {
+//                 inquirerPrompt();
+//               }, 1000);
+//             } else {
+//               console.log("Good news! Your desired item is in stock!");
+//               console.log(
+//                 "Your total cost for " +
+//                   userPurchase.quantity +
+//                   " " +
+//                   results[0].product_name +
+//                   " is " +
+//                   "$" +
+//                   userPurchase.quantity * results[0].price +
+//                   "."
+//               );
+//               var updatedInventory =
+//                 results[i].stock_quantity - userPurchase.quantity;
+//               var purchaseID = userPurchase.itemId;
+//               setTimeout(function() {
+//                 anotherPurchase();
+//               }, 1000);
+//             }
+//           }
+//         }
+//       );
+//     });
+// }
 
 function anotherPurchase() {
   inquirer

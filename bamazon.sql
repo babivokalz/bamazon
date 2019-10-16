@@ -21,7 +21,7 @@ CREATE TABLE products
     INSERT INTO products
         (product_name, department_name, price, stock_quantity)
     VALUES
-        ("Bananas", "Groceries", 0.20, 40),
+        ("Bananas", "Groceries", 0.20, 50),
         ("Orange Juice", "Groceries", 2.50, 20),
         ("Dawn Dish Detergent", "Household", 4.75, 30),
         ("Tide Pods", "Household", 21.44, 150),
@@ -42,6 +42,7 @@ CREATE TABLE products
     UPDATE products SET price = "99.9" WHERE item_id = 10;
     UPDATE products SET price = "0.25" WHERE item_id = 1;
     UPDATE products SET price = "2.59" WHERE item_id = 2;
+
 
     SELECT *
     FROM products
