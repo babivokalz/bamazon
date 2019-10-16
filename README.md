@@ -32,7 +32,7 @@ The item quantity is then updated to reflect the amount that the user purchased
 
 > ![alt text][logo2]
 
-> [logo2]:
+> [logo2]: https://github.com/babivokalz/bamazon/blob/master/images/quantities%20updating.png "updated quantities"
 
 The user will then be asked if they would like to make another purchase, if they choose yes then they will be prompted to enter in the item ID and quantity that they would like to purchase next.
 
