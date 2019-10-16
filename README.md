@@ -28,17 +28,23 @@ Once the user answers the first prompt, they are prompted once more to enter in 
 
 > [logo1]: https://github.com/babivokalz/bamazon/blob/master/images/total%20cost%20of%20item.png "qt amt and total"
 
-The user will then be asked if they would like to make another purchase, if they choose yes then they will be prompted to enter in the item ID and quantity that they would like to purchase next.
+The item quantity is then updated to reflect the amount that the user purchased
 
 > ![alt text][logo2]
 
-> [logo2]: https://github.com/babivokalz/bamazon/blob/master/images/Customer%20says%20Y%20.png "yes to another purchase"
+> [logo2]:
 
-If the user declines and doesn't not wish to make another purchase, then a nice goodbye message is displayed and the application will end.
+The user will then be asked if they would like to make another purchase, if they choose yes then they will be prompted to enter in the item ID and quantity that they would like to purchase next.
 
 > ![alt text][logo3]
 
-> [logo3]: https://github.com/babivokalz/bamazon/blob/master/images/customer%20declines%20another%20purchase.png "no to another purchase"
+> [logo3]: https://github.com/babivokalz/bamazon/blob/master/images/Customer%20says%20Y%20.png "yes to another purchase"
+
+If the user declines and doesn't not wish to make another purchase, then a nice goodbye message is displayed and the application will end.
+
+> ![alt text][logo4]
+
+> [logo4]: https://github.com/babivokalz/bamazon/blob/master/images/customer%20declines%20another%20purchase.png "no to another purchase"
 
 ### Manager view
 
